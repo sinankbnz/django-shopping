@@ -1,0 +1,104 @@
+{% extends "theme.html" %}
+{% block content %}
+{% load static %}
+{% load cart_tag %}
+
+
+<body>
+
+
+	<section id="cart_items">
+		<div class="container">
+			<div class="breadcrumbs">
+				<ol class="breadcrumb">
+				  <li><a href="#">Home</a></li>
+				  <li class="active">Shopping Cart</li>
+				</ol>
+			</div>
+			<div class="table-responsive cart_info">
+				<table class="table table-condensed">
+					<thead>
+						<tr class="cart_menu">
+							<td class="image">Item</td>
+							<td class="description"></td>
+							<td class="quantity">Price</td>
+							<td class="price">Quantity</td>
+							<td class="total">Total</td>
+							<td></td>
+						</tr>
+					</thead>
+					<tbody>
+						{% for key,value in request.session.cart.items %}
+
+						<tr>
+							<td class="cart_product">
+								<a href=""><img src="{{value.image}} " alt="" height="170%" width="170" ></a>
+							</td>
+							<td class="cart_description">
+								<h4 style="text-transform: capitalize;"><a href="">{{value.name}} </a></h4>
+							</td>
+							<td class="cart_price">
+								<p>₹{{value.price}}</p>
+							</td>
+							<td class="cart_quantity">
+								<script type="text/javascript">
+        var x = 0;
+
+        document.getElementById('output-area').innerHTML = x;
+        
+        function button1() {
+          document.getElementById('output-area').innerHTML = ++x;
+        }
+        
+        function button2() {
+          document.getElementById('output-area').innerHTML = --x;
+        }
+        
+    </script>
+							<div class="cart_quantity_button">
+									<input type=button value="-" onclick="button2()" />
+									<span id="output-area" ></span>
+									<input type=button value="+" onclick="button1()" />
+								</div>
+							</td>
+							<td class="cart_total">
+								<p class="cart_total_price">₹ {{value.price}}</p>
+							</td>
+							<td class="cart_delete">
+								<a class="cart_quantity_delete" href="{% url 'item_clear' key %}"><i class="fa fa-times"></i></a>
+							</td>
+						</tr>
+
+						{% endfor %}
+						<tr>
+							<td></td>
+							<td></td>
+							<td></td>
+							<td></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section> <!--/#cart_items-->
+
+	<section id="do_action">
+		<div class="container">
+			
+			
+				<div class="col-sm-7" style="margin-left: 20%;">
+					<div class="total_area">
+						<ul>
+							<li>Cart Sub Total <span>$59</span></li>
+							<li>Eco Tax <span>$2</span></li>
+							<li>Shipping Cost <span>Free</span></li>
+							<li>Total <span>$61</span></li>
+						</ul>
+							<a class="btn btn-default check_out" style="margin-left: 40%;" href="">&nbsp;&nbsp;&nbsp;  Check Out  &nbsp;&nbsp;&nbsp;</a>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section><!--/#do_action-->
+
+{% endblock content %}
